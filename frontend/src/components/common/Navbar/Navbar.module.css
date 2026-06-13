@@ -1,1 +1,14 @@
 /* Navbar */
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    top: var(--navbar-heigth);
+    padding: 2rem;
+    background-color: #fff;
+}
+
+.colorUnico{
+    color: #FF4D96;
+}
