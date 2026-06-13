@@ -1,0 +1,35 @@
+:root {
+  /* ── Colores ─────────────────────────────────────────────── */
+  --color-primary:     #F8BBD0;
+  --color-cta:         #FF6FAE;
+  --color-text:        #2D2D2D;
+  --color-text-light:  #666666;
+  --color-bg:          #FFF7FA;
+  --color-white:       #FFFFFF;
+  --color-border:      #F8E0EC;
+  --color-surface:     #FCE4EC;
+  --color-dark:        #1A1A1A;
+
+  /* ── Tipografía ──────────────────────────────────────────── */
+  --font-family:  'Poppins', sans-serif;
+  --font-h1:  64px;  --font-h2: 40px;  --font-h3: 28px;  --font-h4: 20px;
+  --font-body: 16px; --font-sm: 14px;  --font-xs: 12px;
+  --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600; --fw-bold: 700;
+
+  /* ── Espaciado ───────────────────────────────────────────── */
+  --space-xs: 4px;  --space-sm: 8px;  --space-md: 16px;
+  --space-lg: 24px; --space-xl: 40px; --space-xxl: 64px;
+
+  /* ── Radios ──────────────────────────────────────────────── */
+  --radius-sm: 6px; --radius-md: 12px; --radius-lg: 20px; --radius-full: 100px;
+
+  /* ── Sombras ─────────────────────────────────────────────── */
+  --shadow-sm: 0 2px 8px  rgba(255,111,174,0.10);
+  --shadow-md: 0 4px 24px rgba(255,111,174,0.15);
+  --shadow-lg: 0 8px 40px rgba(255,111,174,0.20);
+
+  /* ── Layout ──────────────────────────────────────────────── */
+  --max-width:      1440px;
+  --padding-page:   80px;
+  --navbar-height:  72px;
+}

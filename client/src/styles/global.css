@@ -1,0 +1,21 @@
+/* Contenedor principal */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--padding-page);
+}
+
+/* Botón primario reutilizable */
+.btn-primary {
+  background: var(--color-cta);
+  color: var(--color-white);
+  border-radius: var(--radius-full);
+  padding: var(--space-sm) var(--space-lg);
+  font-weight: var(--fw-semibold);
+  font-size: var(--font-sm);
+  transition: opacity 0.2s;
+}
+.btn-primary:hover { opacity: 0.88; }
+
+/* Sección genérica */
+.section { padding: var(--space-xxl) 0; }
