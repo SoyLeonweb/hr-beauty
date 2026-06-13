@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "client": "cd client && npm run dev",
-    "server": "cd server && npm run dev",
-    "dev":    "concurrently \"npm run client\" \"npm run server\"",
-    "install:all": "npm i && cd client && npm i && cd ../server && npm i"
+    "frontend": "cd frontend && npm run dev",
+    "backend": "cd backend && npm run dev",
+    "dev":    "concurrently \"npm run frontend\" \"npm run backend\"",
+    "install:all": "npm i && cd frontend && npm i && cd ../backend && npm i"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
