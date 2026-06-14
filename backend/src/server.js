@@ -9,10 +9,21 @@ const app  = express()
 const PORT = process.env.PORT || 5000
 
 app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:3000' }))
-app.use(express.json())
-app.use(morgan('dev'))
 
+// express.json con verify para capturar rawBody.
+// El webhook de Wompi lo necesita para verificar la firma HMAC.
+app.use(
+  express.json({
+    verify: function (req, res, buf) {
+      req.rawBody = buf.toString()
+    },
+  })
+)
+
+app.use(morgan('dev'))
 app.use('/api', routes)
 app.use(errorHandler)
 
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`))
+app.listen(PORT, function () {
+  console.log('HR Beauty API en http://localhost:' + PORT)
+})

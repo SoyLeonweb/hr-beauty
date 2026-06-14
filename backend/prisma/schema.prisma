@@ -7,15 +7,37 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ─────────────────────────────────────────────────
+//  ENUMS
+// ─────────────────────────────────────────────────
+
+enum Role          { CUSTOMER ADMIN }
+enum OrderStatus   { PENDING PAID SHIPPED DELIVERED CANCELLED }
+enum PaymentStatus { PENDING APPROVED DECLINED VOIDED }
+enum CouponType    { PERCENT FIXED SHIPPING }
+enum CartStatus    { ACTIVE MERGED ABANDONED }
+
+// ─────────────────────────────────────────────────
+//  USER
+// ─────────────────────────────────────────────────
+
 model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   password  String
   name      String
+  phone     String?
   role      Role     @default(CUSTOMER)
   createdAt DateTime @default(now())
-  orders    Order[]
+  updatedAt DateTime @updatedAt
+
+  cart   Cart?
+  orders Order[]
 }
+
+// ─────────────────────────────────────────────────
+//  CATEGORY
+// ─────────────────────────────────────────────────
 
 model Category {
   id       Int       @id @default(autoincrement())
@@ -24,44 +46,194 @@ model Category {
   products Product[]
 }
 
+// ─────────────────────────────────────────────────
+//  PRODUCT
+//  REGLA: costoCompra NUNCA se envía al cliente.
+//  precioVenta es lo que ve el cliente (pesos COP, entero).
+// ─────────────────────────────────────────────────
+
 model Product {
-  id          Int         @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
+  sku         String?  @unique
   name        String
-  slug        String      @unique
+  slug        String   @unique
   description String?
-  price       Float
-  oldPrice    Float?
-  stock       Int         @default(0)
+  marca       String?
+  tipo        String?
   images      String[]
-  rating      Float       @default(0)
-  reviewCount Int         @default(0)
-  featured    Boolean     @default(false)
-  categoryId  Int
-  category    Category    @relation(fields: [categoryId], references: [id])
-  createdAt   DateTime    @default(now())
-  orderItems  OrderItem[]
+  rating      Float    @default(0)
+  reviewCount Int      @default(0)
+  featured    Boolean  @default(false)
+  activo      Boolean  @default(true)
+
+  // Precios en pesos COP (enteros, sin decimales)
+  precioVenta Int             // visible al cliente
+  costoCompra Int @default(0) // 🔒 NUNCA exponer en respuestas al cliente
+
+  stock      Int @default(0)
+
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cartItems  CartItem[]
+  orderItems OrderItem[]
 }
+
+// ─────────────────────────────────────────────────
+//  COUPON
+// ─────────────────────────────────────────────────
+
+model Coupon {
+  id            Int        @id @default(autoincrement())
+  code          String     @unique
+  type          CouponType // PERCENT | FIXED | SHIPPING
+  value         Int        // PERCENT→ ej: 10 = 10% | FIXED→ pesos | SHIPPING→ 0
+  minOrderPesos Int        @default(0)
+  maxUses       Int?       // null = ilimitado
+  usesCount     Int        @default(0)
+  expiresAt     DateTime?
+  activo        Boolean    @default(true)
+  createdAt     DateTime   @default(now())
+
+  carts  Cart[]
+  orders Order[]
+}
+
+// ─────────────────────────────────────────────────
+//  CART
+// ─────────────────────────────────────────────────
+
+model Cart {
+  id        Int        @id @default(autoincrement())
+  userId    Int        @unique
+  user      User       @relation(fields: [userId], references: [id])
+  status    CartStatus @default(ACTIVE)
+  couponId  Int?
+  coupon    Coupon?    @relation(fields: [couponId], references: [id])
+  expiresAt DateTime?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  items CartItem[]
+  order Order?
+}
+
+// ─────────────────────────────────────────────────
+//  CART ITEM
+//  precioSnapshot: precio al agregar (inmune a cambios de precio)
+// ─────────────────────────────────────────────────
+
+model CartItem {
+  id             Int      @id @default(autoincrement())
+  cartId         Int
+  cart           Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  productId      Int
+  product        Product  @relation(fields: [productId], references: [id])
+  quantity       Int      @default(1)
+  precioSnapshot Int      // precioVenta en el momento de agregar
+  addedAt        DateTime @default(now())
+
+  @@unique([cartId, productId])
+}
+
+// ─────────────────────────────────────────────────
+//  ORDER
+//  Solo contiene totales visibles al cliente.
+//  La rentabilidad interna va en ProfitLog.
+// ─────────────────────────────────────────────────
 
 model Order {
-  id          Int         @id @default(autoincrement())
-  userId      Int
-  user        User        @relation(fields: [userId], references: [id])
-  status      OrderStatus @default(PENDING)
-  total       Float
-  address     String
-  items       OrderItem[]
-  createdAt   DateTime    @default(now())
+  id                Int         @id @default(autoincrement())
+  userId            Int
+  user              User        @relation(fields: [userId], references: [id])
+  cartId            Int         @unique
+  cart              Cart        @relation(fields: [cartId], references: [id])
+  couponId          Int?
+  coupon            Coupon?     @relation(fields: [couponId], references: [id])
+  status            OrderStatus @default(PENDING)
+
+  // Totales visibles al cliente (pesos COP enteros)
+  subtotalPesos     Int
+  descuentoPesos    Int @default(0)
+  envioPesos        Int @default(0)
+  totalClientePesos Int
+
+  // Dirección de envío
+  address    String?
+  city       String?
+  department String?
+  zip        String?
+  phone      String?
+  notes      String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  paidAt    DateTime?
+
+  items     OrderItem[]
+  payment   Payment?
+  profitLog ProfitLog?
 }
+
+// ─────────────────────────────────────────────────
+//  ORDER ITEM — snapshot de precio y costo al cerrar el pedido
+// ─────────────────────────────────────────────────
 
 model OrderItem {
-  id        Int     @id @default(autoincrement())
-  orderId   Int
-  order     Order   @relation(fields: [orderId], references: [id])
-  productId Int
-  product   Product @relation(fields: [productId], references: [id])
-  qty       Int
-  price     Float
+  id                  Int     @id @default(autoincrement())
+  orderId             Int
+  order               Order   @relation(fields: [orderId], references: [id])
+  productId           Int
+  product             Product @relation(fields: [productId], references: [id])
+  quantity            Int
+  precioVentaSnapshot Int     // precio de venta en ese momento
+  costoCompraSnapshot Int     @default(0) // 🔒 costo interno — nunca al cliente
 }
 
-enum Role        { CUSTOMER ADMIN }
-enum OrderStatus { PENDING PAID SHIPPED DELIVERED CANCELLED }
+// ─────────────────────────────────────────────────
+//  PAYMENT  (Wompi)
+// ─────────────────────────────────────────────────
+
+model Payment {
+  id                 Int           @id @default(autoincrement())
+  orderId            Int           @unique
+  order              Order         @relation(fields: [orderId], references: [id])
+  wompiTransactionId String?       @unique
+  amountPesos        Int
+  status             PaymentStatus @default(PENDING)
+  webhookPayload     Json?         // payload crudo de Wompi (auditoría)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+}
+
+// ─────────────────────────────────────────────────
+//  PROFIT LOG  🔒 NUNCA exponer al cliente
+//  Se crea SOLO cuando payment.status = APPROVED
+// ─────────────────────────────────────────────────
+
+model ProfitLog {
+  id      Int   @id @default(autoincrement())
+  orderId Int   @unique
+  order   Order @relation(fields: [orderId], references: [id])
+
+  // Ingreso
+  totalClientePesos   Int
+
+  // Costos internos
+  costoProductosPesos Int   // suma(costoCompra × qty)
+  comisionWompiPesos  Int   // total × 2.65% + 700
+  ivaComisionPesos    Int   // comision × 19%
+  empaquePesos        Int   @default(500)
+  publicidadPesos     Int   @default(1500)
+  envioCostoPesos     Int   @default(0)
+
+  // Resultado
+  totalCostosPesos Int
+  gananciaNeta     Int
+  margenPct        Float // (gananciaNeta / totalClientePesos) × 100
+
+  createdAt DateTime @default(now())
+}
