@@ -5,7 +5,7 @@ router.use('/products', require('./products.routes'))
 router.use('/orders',   require('./orders.routes'))
 router.use('/users',    require('./users.routes'))
 
-// Ecommerce: carrito, checkout, pagos, admin
+// Nuevas rutas de ecommerce
 router.use('/cart',     require('./cart.routes'))
 router.use('/checkout', require('./checkout.routes'))
 router.use('/payment',  require('./payment.routes'))

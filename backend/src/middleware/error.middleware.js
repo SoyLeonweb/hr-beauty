@@ -1,4 +1,4 @@
-const errorHandler = function (err, req, res, next) {
+const errorHandler = (err, req, res, next) => {
   // Errores operacionales conocidos (AppError)
   if (err.isOperational) {
     return res.status(err.status).json({ success: false, message: err.message })
@@ -14,13 +14,13 @@ const errorHandler = function (err, req, res, next) {
     return res.status(409).json({ success: false, message: 'Ya existe un registro con esos datos' })
   }
 
-  // Error inesperado — no revelar detalles en producción
+  // Error inesperado — no revelar detalles internos en producción
   console.error('[ERROR]', err)
-  var message = process.env.NODE_ENV === 'production'
+  const message = process.env.NODE_ENV === 'production'
     ? 'Error interno del servidor'
     : err.message
 
-  res.status(500).json({ success: false, message: message })
+  res.status(500).json({ success: false, message })
 }
 
 module.exports = { errorHandler }
