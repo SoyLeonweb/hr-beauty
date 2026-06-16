@@ -1,1 +1,336 @@
-/* Dashboard page */
+/* ── Layout ─────────────────────────────────────────────────── */
+.page {
+  display: flex;
+  flex-direction: row-reverse;
+  min-height: 100vh;
+  background: #faf8fc;
+  font-family: var(--font-family);
+}
+
+.main {
+  flex: 1;
+  padding: 36px 36px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pageTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pageTitleIcon {
+  color: var(--color-cta);
+}
+
+.pageTitle {
+  font-size: 22px;
+  font-weight: var(--fw-bold);
+  color: var(--color-dark);
+  margin: 0;
+}
+
+.datePicker {
+  padding: 8px 20px;
+  border: 1.5px solid #e8dff0;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: var(--fw-medium);
+  color: var(--color-dark);
+  background: var(--color-white);
+  cursor: pointer;
+}
+
+/* ── KPI Cards ──────────────────────────────────────────────── */
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.kpiCard {
+  border-radius: var(--radius-md);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.kpiTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.kpiIconBox {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* KPI color variants */
+.kpiPink   { background: #fff0f6; }
+.kpiPurple { background: #f3eeff; }
+.kpiBlue   { background: #e8f4ff; }
+.kpiGreen  { background: #edfaf3; }
+
+.kpiPink   .kpiIconBox { background: #ffd6eb; color: #d63384; }
+.kpiPurple .kpiIconBox { background: #e2d5ff; color: #7c3aed; }
+.kpiBlue   .kpiIconBox { background: #c9e4ff; color: #1d6fa4; }
+.kpiGreen  .kpiIconBox { background: #c3f0da; color: #1a7f4b; }
+
+.kpiLabel {
+  font-size: 12px;
+  color: #777;
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kpiValue {
+  font-size: 26px;
+  font-weight: var(--fw-bold);
+  color: var(--color-dark);
+  line-height: 1;
+}
+
+.kpiDelta {
+  font-size: 11px;
+  color: #1a7f4b;
+  font-weight: var(--fw-medium);
+}
+
+/* ── Mid Row ────────────────────────────────────────────────── */
+.midRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.7fr;
+  gap: 16px;
+}
+
+/* ── Cards ──────────────────────────────────────────────────── */
+.chartCard,
+.productsCard,
+.mapCard,
+.ordersCard {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.cardTitle {
+  font-size: 14px;
+  font-weight: var(--fw-semibold);
+  color: var(--color-dark);
+  margin: 0;
+}
+
+.cardIcon       { color: var(--color-cta); }
+.cardIconPurple { color: #7c3aed; }
+.cardIconBlue   { color: #1d6fa4; }
+.cardIconGreen  { color: #1a7f4b; }
+
+/* ── Tooltip ────────────────────────────────────────────────── */
+.tooltip {
+  background: var(--color-white);
+  border: 1px solid #f0e6f6;
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  box-shadow: 0 4px 16px rgba(255,111,174,0.12);
+}
+
+.tooltipLabel {
+  font-size: 12px;
+  color: var(--color-text-light);
+  margin: 0 0 2px;
+}
+
+.tooltipVal {
+  font-size: 14px;
+  font-weight: var(--fw-semibold);
+  color: var(--color-cta);
+  margin: 0;
+}
+
+/* ── Products list ──────────────────────────────────────────── */
+.productList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.productRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.productThumb {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rankNum {
+  font-size: 13px;
+  font-weight: var(--fw-bold);
+}
+
+.rank1 { background: #fff0c2; color: #b45309; }
+.rank2 { background: #f0f0f0; color: #555; }
+.rank3 { background: #ffe8d6; color: #9a3412; }
+.rank4 { background: #f3eeff; color: #7c3aed; }
+.rank5 { background: #e8f4ff; color: #1d6fa4; }
+
+.productName {
+  flex: 1;
+  font-size: 13px;
+  color: var(--color-text);
+}
+
+.productSales {
+  font-size: 13px;
+  font-weight: var(--fw-semibold);
+  color: var(--color-cta);
+}
+
+/* ── Map ────────────────────────────────────────────────────── */
+.mapPlaceholder {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, #fce4ec 0%, #e8eaf6 100%);
+  border-radius: var(--radius-md);
+}
+
+/* ── Orders table ───────────────────────────────────────────── */
+.ordersCard { width: 100%; }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableRow { border-bottom: 1px solid #f5f5f5; }
+.tableRow:last-child { border-bottom: none; }
+.tableRow td { padding: 13px 8px; font-size: 13px; }
+
+.tdId     { font-weight: var(--fw-semibold); color: var(--color-dark); width: 80px; }
+.tdCliente{ color: var(--color-text-light); width: 180px; }
+.tdMonto  { color: var(--color-dark); font-weight: var(--fw-medium); width: 120px; }
+.tdFecha  { color: var(--color-text-light); text-align: right; }
+
+/* ── Badges ─────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: var(--fw-medium);
+}
+
+.badgeGreen  { background: #edfaf3; color: #1a7f4b; }
+.badgeBlue   { background: #e8f4ff; color: #1d6fa4; }
+.badgeOrange { background: #fff4e5; color: #b45309; }
+
+/* ── Sidebar ────────────────────────────────────────────────── */
+.sidebar {
+  width: 230px;
+  min-height: 100vh;
+  background: #1e1826;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 0;
+  flex-shrink: 0;
+}
+
+.sidebarBrand {
+  font-size: 16px;
+  font-weight: var(--fw-bold);
+  color: var(--color-white);
+  padding: 0 24px 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brandDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-cta);
+  flex-shrink: 0;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 10px;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: 13px;
+  font-weight: var(--fw-medium);
+  color: rgba(255,255,255,0.45);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, color 0.15s;
+}
+
+.navLink:hover {
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.85);
+}
+
+.navLinkActive {
+  background: rgba(255,111,174,0.15);
+  color: #FF6FAE;
+}
+
+.navIcon {
+  flex-shrink: 0;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+
+.navLinkActive .navIcon { opacity: 1; }
+.navLink:hover .navIcon { opacity: 0.9; }
