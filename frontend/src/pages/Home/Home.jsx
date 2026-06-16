@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ProductCard from '../../components/product/ProductCard'
 import styles from './Home.module.css'
+import heroImg from '@assets/images/hero/imagen-skincare-1.png'
+import imgMaquillaje from '@assets/images/categories/producto-maquillaje-polvo.png'
+import imgSkincare from '@assets/images/categories/producto-skincare.png'
 
 // ── SVG Icons (Why LUMINA) ────────────────────────────────────────────────────
 const LeafIcon = () => (
@@ -62,10 +65,10 @@ const PRODUCTS = [
 ]
 
 const CATEGORIES = [
-  { name: 'Maquillaje',       desc: 'Bases, labiales, máscaras y más.',            href: '/catalogo?categoria=maquillaje',       bg: '#FCE4EC' },
-  { name: 'Skincare',         desc: 'Rutinas completas para todo tipo de piel.',    href: '/catalogo?categoria=skincare',         bg: '#F3E5F5' },
-  { name: 'Protección Solar', desc: 'Protección diaria para una piel cuidada.',     href: '/catalogo?categoria=proteccion-solar', bg: '#FFF3E0' },
-  { name: 'Tratamientos',     desc: 'Soluciones avanzadas para el cuidado facial.', href: '/catalogo?categoria=tratamientos',     bg: '#E8F5E9' },
+  { name: 'Maquillaje',       desc: 'Bases, labiales, máscaras y más.',            href: '/catalogo?categoria=maquillaje',       bg: '#FCE4EC', img: imgMaquillaje },
+  { name: 'Skincare',         desc: 'Rutinas completas para todo tipo de piel.',    href: '/catalogo?categoria=skincare',         bg: '#F3E5F5', img: imgSkincare  },
+  { name: 'Protección Solar', desc: 'Protección diaria para una piel cuidada.',     href: '/catalogo?categoria=proteccion-solar', bg: '#FFF3E0', img: null         },
+  { name: 'Tratamientos',     desc: 'Soluciones avanzadas para el cuidado facial.', href: '/catalogo?categoria=tratamientos',     bg: '#E8F5E9', img: null         },
 ]
 
 const STATS = [
@@ -175,7 +178,7 @@ export default function Home() {
         </div>
 
         <div className={styles.heroVisual}>
-          <div className={styles.heroImage} />
+          <img src={heroImg} alt="Skincare HR Beauty" className={styles.heroImage} />
           <div className={styles.heroFloatCard}>
             <span className={styles.heroFloatName}>Sérum Hyaluronic</span>
             <span className={styles.heroFloatPrice}>€39,00</span>
@@ -207,7 +210,10 @@ export default function Home() {
               className={styles.categoryCard}
               style={{ backgroundColor: cat.bg }}
             >
-              <div className={styles.categoryImage} />
+              {cat.img
+                ? <img src={cat.img} alt={cat.name} className={styles.categoryImage} />
+                : <div className={styles.categoryImage} />
+              }
               <div className={styles.categoryInfo}>
                 <h3 className={styles.categoryName}>{cat.name}</h3>
                 <p className={styles.categoryDesc}>{cat.desc}</p>

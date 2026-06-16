@@ -1,1 +1,345 @@
-/* Login page */
+/* ── Layout ────────────────────────────────────────────────── */
+.page {
+  display: flex;
+  min-height: 100vh;
+  font-family: var(--font-family);
+}
+
+/* ── Panel izquierdo ────────────────────────────────────────── */
+.left {
+  width: 47%;
+  background: linear-gradient(160deg, #FFD6E8 0%, #FFADD2 50%, #FF85BE 100%);
+  display: flex;
+  align-items: stretch;
+  padding: 48px 40px;
+  flex-shrink: 0;
+}
+
+.leftInner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.logo {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+}
+
+.tagline {
+  margin-top: 12px;
+  font-size: 16px;
+  color: #4a2040;
+  font-weight: var(--fw-medium);
+}
+
+.heroCard {
+  flex: 1;
+  margin-top: 32px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 24px;
+  backdrop-filter: blur(8px);
+  min-height: 280px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.heroImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.skincareImg {
+  position: relative;
+  z-index: 1;
+  width: 55%;
+  object-fit: contain;
+  margin-bottom: -8px;
+  margin-right: 16px;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.15));
+}
+
+.testimonialCard {
+  margin-top: 24px;
+  background: rgba(255, 255, 255, 0.30);
+  border-radius: 20px;
+  padding: 24px 28px;
+  backdrop-filter: blur(6px);
+}
+
+.testimonialText {
+  font-size: 15px;
+  color: #3a1a30;
+  font-weight: var(--fw-medium);
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stars {
+  color: var(--color-cta);
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.ratingVal {
+  font-size: 14px;
+  font-weight: var(--fw-semibold);
+  color: #3a1a30;
+}
+
+/* ── Panel derecho ──────────────────────────────────────────── */
+.right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+  background: var(--color-white);
+  overflow-y: auto;
+}
+
+.formBox {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* ── Tabs ───────────────────────────────────────────────────── */
+.tabs {
+  display: inline-flex;
+  background: #f2f2f2;
+  border-radius: var(--radius-full);
+  padding: 4px;
+  margin-bottom: 36px;
+}
+
+.tab {
+  padding: 10px 24px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: var(--fw-medium);
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.tabActive {
+  background: var(--color-white);
+  color: var(--color-dark);
+  font-weight: var(--fw-semibold);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.10);
+}
+
+/* ── Headings ───────────────────────────────────────────────── */
+.heading {
+  font-size: 30px;
+  font-weight: var(--fw-bold);
+  color: var(--color-dark);
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+
+.sub {
+  font-size: 14px;
+  color: var(--color-text-light);
+  margin: 0 0 32px;
+  line-height: 1.5;
+}
+
+/* ── Google btn ─────────────────────────────────────────────── */
+.googleBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: var(--fw-medium);
+  color: var(--color-dark);
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.googleBtn:hover {
+  border-color: #ccc;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Divider ────────────────────────────────────────────────── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+  color: #ccc;
+  font-size: 13px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e8e8e8;
+}
+
+/* ── Form ───────────────────────────────────────────────────── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: var(--fw-medium);
+  color: var(--color-dark);
+}
+
+.input {
+  padding: 13px 16px;
+  border: 1.5px solid #ebebeb;
+  border-radius: var(--radius-md);
+  background: #fafafa;
+  font-family: var(--font-family);
+  font-size: 14px;
+  color: var(--color-dark);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.input::placeholder {
+  color: #c0c0c0;
+}
+
+.input:focus {
+  border-color: var(--color-cta);
+  background: var(--color-white);
+  box-shadow: 0 0 0 3px rgba(255, 111, 174, 0.10);
+}
+
+/* ── Forgot password ────────────────────────────────────────── */
+.forgotRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -6px;
+}
+
+.forgot {
+  background: none;
+  border: none;
+  font-family: var(--font-family);
+  font-size: 13px;
+  color: var(--color-cta);
+  cursor: pointer;
+  padding: 0;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+/* ── Submit btn ─────────────────────────────────────────────── */
+.submitBtn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-cta) 0%, #ff3d9a 100%);
+  color: var(--color-white);
+  font-family: var(--font-family);
+  font-size: 15px;
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  margin-top: 4px;
+}
+
+.submitBtn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.submitBtn:active {
+  transform: translateY(0);
+}
+
+/* ── Switch ─────────────────────────────────────────────────── */
+.switchText {
+  text-align: center;
+  font-size: 14px;
+  color: var(--color-text-light);
+  margin-top: 24px;
+}
+
+.switchLink {
+  background: none;
+  border: none;
+  font-family: var(--font-family);
+  font-size: 14px;
+  color: var(--color-cta);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+  padding: 0;
+}
+
+.switchLink:hover {
+  text-decoration: underline;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .page {
+    flex-direction: column;
+  }
+
+  .left {
+    width: 100%;
+    min-height: 220px;
+    padding: 32px 24px;
+  }
+
+  .heroCard {
+    display: none;
+  }
+
+  .testimonialCard {
+    margin-top: 16px;
+  }
+
+  .right {
+    padding: 32px 24px;
+  }
+
+  .heading {
+    font-size: 24px;
+  }
+}
