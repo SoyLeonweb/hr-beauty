@@ -1,1 +1,140 @@
 /* Navbar */
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--padding-page);
+    height: var(--navbar-height);
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-surface);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.scrolled {
+    box-shadow: var(--shadow-md);
+    background-color: rgba(255, 247, 250, 0.97);
+    backdrop-filter: blur(8px);
+}
+
+.logo img {
+    height: 100px;
+    width: auto;
+    display: block;
+
+}
+
+/* Nav Links */
+
+.navLinks {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.navLink {
+    font-family: var(--font-family);
+    font-size: var(--font-sm);
+    font-weight: var(--fw-regular);
+    color: var(--color-text);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+
+.navLink:hover {
+    color: var(--color-cta);
+}
+
+.active {
+    color: var(--color-cta);
+    font-weight: var(--fw-semibold);
+}
+
+/* Nav Actions */
+
+.navActions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Icon buttons */
+.iconLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-light);
+    text-decoration: none;
+    transition: color 0.2s;
+    line-height: 0;
+}
+
+.iconLink:hover {
+    color: var(--color-cta);
+}
+
+.iconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-light);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+    line-height: 0;
+}
+
+.iconButton:hover {
+    color: var(--color-cta);
+}
+
+/* Cart badge */
+.cartWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cartBadge {
+    position: absolute;
+    top: -6px;
+    right: -7px;
+    background-color: var(--color-cta);
+    color: var(--color-white);
+    font-family: var(--font-family);
+    font-size: 9px;
+    font-weight: var(--fw-semibold);
+    min-width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3px;
+    line-height: 1;
+}
+
+.ctaButton {
+    background-color: var(--color-cta);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-full);
+    padding: 10px var(--space-lg);
+    font-family: var(--font-family);
+    font-size: 13px;
+    font-weight: var(--fw-semibold);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.ctaButton:hover {
+    opacity: 0.88;
+}
