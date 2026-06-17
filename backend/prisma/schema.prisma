@@ -15,6 +15,7 @@ model User {
   role      Role     @default(CUSTOMER)
   createdAt DateTime @default(now())
   orders    Order[]
+  cart      Cart?
 }
 
 model Category {
@@ -40,17 +41,58 @@ model Product {
   category    Category    @relation(fields: [categoryId], references: [id])
   createdAt   DateTime    @default(now())
   orderItems  OrderItem[]
+  cartItems   CartItem[]
+}
+
+model Cart {
+  id        Int        @id @default(autoincrement())
+  userId    Int        @unique
+  user      User       @relation(fields: [userId], references: [id])
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model CartItem {
+  id        Int     @id @default(autoincrement())
+  cartId    Int
+  cart      Cart    @relation(fields: [cartId], references: [id])
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int     @default(1)
+  price     Float
+}
+
+model Coupon {
+  id         Int      @id @default(autoincrement())
+  code       String   @unique
+  type       String   // "percent" | "fixed"
+  value      Float
+  maxUses    Int      @default(100)
+  usedCount  Int      @default(0)
+  active     Boolean  @default(true)
+  expiresAt  DateTime?
+  orders     Order[]
+  createdAt  DateTime @default(now())
 }
 
 model Order {
-  id          Int         @id @default(autoincrement())
-  userId      Int
-  user        User        @relation(fields: [userId], references: [id])
-  status      OrderStatus @default(PENDING)
-  total       Float
-  address     String
-  items       OrderItem[]
-  createdAt   DateTime    @default(now())
+  id              Int         @id @default(autoincrement())
+  userId          Int
+  user            User        @relation(fields: [userId], references: [id])
+  status          String      @default("pending")
+  subtotal        Float
+  discount        Float       @default(0)
+  shippingCost    Float       @default(0)
+  total           Float
+  couponId        Int?
+  coupon          Coupon?     @relation(fields: [couponId], references: [id])
+  paymentMethod   String?
+  shippingAddress String?
+  items           OrderItem[]
+  payment         Payment?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
 }
 
 model OrderItem {
@@ -59,9 +101,19 @@ model OrderItem {
   order     Order   @relation(fields: [orderId], references: [id])
   productId Int
   product   Product @relation(fields: [productId], references: [id])
-  qty       Int
+  quantity  Int
   price     Float
 }
 
-enum Role        { CUSTOMER ADMIN }
-enum OrderStatus { PENDING PAID SHIPPED DELIVERED CANCELLED }
+model Payment {
+  id        Int      @id @default(autoincrement())
+  orderId   Int      @unique
+  order     Order    @relation(fields: [orderId], references: [id])
+  amount    Float
+  method    String
+  status    String   @default("pending")
+  reference String?
+  createdAt DateTime @default(now())
+}
+
+enum Role { CUSTOMER ADMIN }
