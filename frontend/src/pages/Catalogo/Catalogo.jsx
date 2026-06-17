@@ -106,19 +106,42 @@ const ALL_PRODUCTS = [
   { id: 'BIO-PL-001',  slug: 'bio-pl-001',  marca: 'Bioaqua', category: 'skincare', tipo: 'Parche de Labios', name: 'Parche de Labios Retinol Bioaqua',              price: 10000, rating: 4.5, reviewCount: 33, badge: null,                                          image: null },
   { id: 'BIO-PL-002',  slug: 'bio-pl-002',  marca: 'Bioaqua', category: 'skincare', tipo: 'Parche de Labios', name: 'Parche de Labios Vitamina C Bioaqua',           price: 10000, rating: 4.6, reviewCount: 27, badge: { type: 'nuevo',      label: 'Nuevo'       }, image: null },
   { id: 'BIO-PL-003',  slug: 'bio-pl-003',  marca: 'Bioaqua', category: 'skincare', tipo: 'Parche de Labios', name: 'Parche de Labios Ácido Hialurónico Bioaqua',    price: 10000, rating: 4.7, reviewCount: 41, badge: null,                                          image: null },
-  // ── Polvo Compacto – Maquillaje ──
-  { id: 'PC-001',       slug: 'pc-001',       marca: 'Uschas',  category: 'maquillaje', tipo: 'Polvo Compacto', name: 'Polvo Compacto Uschas',                        price: 25000, rating: 4.6, reviewCount: 59, badge: { type: 'bestseller', label: 'Más Vendido' }, image: null },
-  { id: 'PC-002',       slug: 'pc-002',       marca: 'Engol',   category: 'maquillaje', tipo: 'Polvo Compacto', name: 'Polvo Compacto Engol',                         price: 22000, rating: 4.5, reviewCount: 44, badge: null,                                          image: null },
-  { id: 'PC-003',       slug: 'pc-003',       marca: 'Alissha', category: 'maquillaje', tipo: 'Polvo Compacto', name: 'Polvo Compacto Alissha',                       price: 23000, rating: 4.7, reviewCount: 37, badge: { type: 'novedad',    label: 'Novedad'     }, image: null },
+  // ── Polvo Compacto – Maquillaje (con tonos) ──
+  { id: 'PC-001', slug: 'pc-001', marca: 'Uschas',  category: 'maquillaje', tipo: 'Polvo Compacto', tono: 'marfil',    name: 'Polvo Compacto Uschas – Marfil',    price: 25000, rating: 4.6, reviewCount: 59, badge: { type: 'bestseller', label: 'Más Vendido' }, image: null },
+  { id: 'PC-002', slug: 'pc-002', marca: 'Engol',   category: 'maquillaje', tipo: 'Polvo Compacto', tono: 'beige',     name: 'Polvo Compacto Engol – Beige',      price: 22000, rating: 4.5, reviewCount: 44, badge: null,                                          image: null },
+  { id: 'PC-003', slug: 'pc-003', marca: 'Alissha', category: 'maquillaje', tipo: 'Polvo Compacto', tono: 'arena',     name: 'Polvo Compacto Alissha – Arena',    price: 23000, rating: 4.7, reviewCount: 37, badge: { type: 'novedad',    label: 'Novedad'     }, image: null },
+  { id: 'PC-004', slug: 'pc-004', marca: 'Uschas',  category: 'maquillaje', tipo: 'Polvo Compacto', tono: 'miel',      name: 'Polvo Compacto Uschas – Miel',      price: 25000, rating: 4.5, reviewCount: 31, badge: null,                                          image: null },
+  { id: 'PC-005', slug: 'pc-005', marca: 'Engol',   category: 'maquillaje', tipo: 'Polvo Compacto', tono: 'caramelo',  name: 'Polvo Compacto Engol – Caramelo',   price: 22000, rating: 4.6, reviewCount: 28, badge: null,                                          image: null },
+  { id: 'PC-006', slug: 'pc-006', marca: 'Alissha', category: 'maquillaje', tipo: 'Polvo Compacto', tono: 'cacao',     name: 'Polvo Compacto Alissha – Cacao',    price: 23000, rating: 4.8, reviewCount: 22, badge: { type: 'nuevo', label: 'Nuevo' },             image: null },
+  { id: 'PC-007', slug: 'pc-007', marca: 'Uschas',  category: 'maquillaje', tipo: 'Polvo Compacto', tono: 'ebano',     name: 'Polvo Compacto Uschas – Ébano',     price: 25000, rating: 4.7, reviewCount: 19, badge: { type: 'nuevo', label: 'Nuevo' },             image: null },
+  { id: 'PC-008', slug: 'pc-008', marca: 'Engol',   category: 'maquillaje', tipo: 'Polvo Compacto', tono: 'porcelana', name: 'Polvo Compacto Engol – Porcelana',  price: 22000, rating: 4.4, reviewCount: 26, badge: null,                                          image: null },
+  // ── Base de Maquillaje ──
+  { id: 'BM-001', slug: 'bm-001', marca: 'Uschas',  category: 'maquillaje', tipo: 'Base de Maquillaje', tono: 'marfil',    name: 'Base Uschas – Marfil',    price: 32000, rating: 4.7, reviewCount: 41, badge: { type: 'bestseller', label: 'Más Vendido' }, image: null },
+  { id: 'BM-002', slug: 'bm-002', marca: 'Uschas',  category: 'maquillaje', tipo: 'Base de Maquillaje', tono: 'beige',     name: 'Base Uschas – Beige',     price: 32000, rating: 4.8, reviewCount: 55, badge: { type: 'bestseller', label: 'Más Vendido' }, image: null },
+  { id: 'BM-003', slug: 'bm-003', marca: 'Uschas',  category: 'maquillaje', tipo: 'Base de Maquillaje', tono: 'arena',     name: 'Base Uschas – Arena',     price: 32000, rating: 4.6, reviewCount: 38, badge: null,                                          image: null },
+  { id: 'BM-004', slug: 'bm-004', marca: 'Uschas',  category: 'maquillaje', tipo: 'Base de Maquillaje', tono: 'miel',      name: 'Base Uschas – Miel',      price: 32000, rating: 4.7, reviewCount: 33, badge: null,                                          image: null },
+  { id: 'BM-005', slug: 'bm-005', marca: 'Uschas',  category: 'maquillaje', tipo: 'Base de Maquillaje', tono: 'caramelo',  name: 'Base Uschas – Caramelo',  price: 32000, rating: 4.5, reviewCount: 27, badge: { type: 'nuevo', label: 'Nuevo' },             image: null },
+  { id: 'BM-006', slug: 'bm-006', marca: 'Engol',   category: 'maquillaje', tipo: 'Base de Maquillaje', tono: 'cacao',     name: 'Base Engol – Cacao',      price: 29000, rating: 4.6, reviewCount: 21, badge: { type: 'nuevo', label: 'Nuevo' },             image: null },
+  { id: 'BM-007', slug: 'bm-007', marca: 'Engol',   category: 'maquillaje', tipo: 'Base de Maquillaje', tono: 'ebano',     name: 'Base Engol – Ébano',      price: 29000, rating: 4.7, reviewCount: 18, badge: { type: 'nuevo', label: 'Nuevo' },             image: null },
+  { id: 'BM-008', slug: 'bm-008', marca: 'Engol',   category: 'maquillaje', tipo: 'Base de Maquillaje', tono: 'porcelana', name: 'Base Engol – Porcelana',  price: 29000, rating: 4.5, reviewCount: 24, badge: null,                                          image: null },
+  // ── Corrector ──
+  { id: 'CC-001', slug: 'cc-001', marca: 'Alissha', category: 'maquillaje', tipo: 'Corrector', tono: 'marfil',    name: 'Corrector Alissha – Marfil',    price: 18000, rating: 4.6, reviewCount: 34, badge: null,                                          image: null },
+  { id: 'CC-002', slug: 'cc-002', marca: 'Alissha', category: 'maquillaje', tipo: 'Corrector', tono: 'beige',     name: 'Corrector Alissha – Beige',     price: 18000, rating: 4.7, reviewCount: 42, badge: { type: 'bestseller', label: 'Más Vendido' }, image: null },
+  { id: 'CC-003', slug: 'cc-003', marca: 'Alissha', category: 'maquillaje', tipo: 'Corrector', tono: 'arena',     name: 'Corrector Alissha – Arena',     price: 18000, rating: 4.5, reviewCount: 29, badge: null,                                          image: null },
+  { id: 'CC-004', slug: 'cc-004', marca: 'Alissha', category: 'maquillaje', tipo: 'Corrector', tono: 'miel',      name: 'Corrector Alissha – Miel',      price: 18000, rating: 4.6, reviewCount: 31, badge: null,                                          image: null },
+  { id: 'CC-005', slug: 'cc-005', marca: 'Alissha', category: 'maquillaje', tipo: 'Corrector', tono: 'caramelo',  name: 'Corrector Alissha – Caramelo',  price: 18000, rating: 4.8, reviewCount: 22, badge: { type: 'nuevo', label: 'Nuevo' },             image: null },
+  { id: 'CC-006', slug: 'cc-006', marca: 'Alissha', category: 'maquillaje', tipo: 'Corrector', tono: 'cacao',     name: 'Corrector Alissha – Cacao',     price: 18000, rating: 4.7, reviewCount: 17, badge: { type: 'nuevo', label: 'Nuevo' },             image: null },
+  { id: 'CC-007', slug: 'cc-007', marca: 'Alissha', category: 'maquillaje', tipo: 'Corrector', tono: 'ebano',     name: 'Corrector Alissha – Ébano',     price: 18000, rating: 4.6, reviewCount: 14, badge: { type: 'nuevo', label: 'Nuevo' },             image: null },
+  { id: 'CC-008', slug: 'cc-008', marca: 'Alissha', category: 'maquillaje', tipo: 'Corrector', tono: 'porcelana', name: 'Corrector Alissha – Porcelana', price: 18000, rating: 4.4, reviewCount: 19, badge: null,                                          image: null },
 ]
 
 const TIPOS_BY_CATEGORY = {
-  '':                 ['Contorno de Ojos','Jabón Facial','Crema Facial','Sérum Facial','Tarro de Ojeras','Protector Solar','Mascarilla Facial','Parche de Labios','Polvo Compacto'],
-  'maquillaje':       ['Polvo Compacto'],
+  '':                 ['Contorno de Ojos','Jabón Facial','Crema Facial','Sérum Facial','Tarro de Ojeras','Protector Solar','Mascarilla Facial','Parche de Labios','Polvo Compacto','Base de Maquillaje','Corrector'],
+  'maquillaje':       ['Polvo Compacto','Base de Maquillaje','Corrector'],
   'skincare':         ['Contorno de Ojos','Jabón Facial','Crema Facial','Sérum Facial','Tarro de Ojeras','Mascarilla Facial','Parche de Labios'],
   'proteccion-solar': ['Protector Solar'],
   'tratamientos':     [],
-  'mas-vendidos':     ['Contorno de Ojos','Sérum Facial','Crema Facial','Mascarilla Facial','Polvo Compacto'],
+  'mas-vendidos':     ['Contorno de Ojos','Sérum Facial','Crema Facial','Mascarilla Facial','Polvo Compacto','Base de Maquillaje','Corrector'],
   'novedades':        ['Jabón Facial','Sérum Facial','Mascarilla Facial','Contorno de Ojos','Parche de Labios'],
 }
 
@@ -157,6 +180,17 @@ const PRICE_RANGES = [
   { label: 'Más de $25.000',          min: 25000, max: Infinity },
 ]
 
+
+const TONOS = [
+  { id: 'marfil',    label: 'Marfil',    hex: '#F5E6D3' },
+  { id: 'beige',     label: 'Beige',     hex: '#E8C9A0' },
+  { id: 'arena',     label: 'Arena',     hex: '#D4A574' },
+  { id: 'miel',      label: 'Miel',      hex: '#C08642' },
+  { id: 'caramelo',  label: 'Caramelo',  hex: '#A0522D' },
+  { id: 'cacao',     label: 'Cacao',     hex: '#7B3F1E' },
+  { id: 'ebano',     label: 'Ébano',     hex: '#4A2010' },
+  { id: 'porcelana', label: 'Porcelana', hex: '#FDE8E0' },
+]
 // ── Component ──────────────────────────────────────────────────────────────────
 export default function Catalogo() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -166,6 +200,7 @@ export default function Catalogo() {
   const [priceRange, setPriceRange]       = useState(null)
   const [minRating, setMinRating]         = useState(0)
   const [selectedTipos, setSelectedTipos] = useState([])
+  const [selectedTonos, setSelectedTonos] = useState([])
   const [sidebarOpen, setSidebarOpen]     = useState(true)
   const [sortOpen, setSortOpen]           = useState(false)
   const sidebarRef                        = useRef(null)
@@ -175,6 +210,7 @@ export default function Catalogo() {
     setPriceRange(null)
     setMinRating(0)
     setSelectedTipos([])
+    setSelectedTonos([])
     setSortBy('relevancia')
   }, [activeCategory])
 
@@ -198,6 +234,11 @@ export default function Catalogo() {
   const toggleTipo = (tipo) =>
     setSelectedTipos(prev =>
       prev.includes(tipo) ? prev.filter(t => t !== tipo) : [...prev, tipo]
+    )
+
+  const toggleTono = (id) =>
+    setSelectedTonos(prev =>
+      prev.includes(id) ? prev.filter(t => t !== id) : [...prev, id]
     )
 
   const setCategory = (slug) => {
@@ -234,6 +275,11 @@ export default function Catalogo() {
       list = list.filter(p => p.rating >= minRating)
     }
 
+    // Tono filter (maquillaje only)
+    if (selectedTonos.length > 0) {
+      list = list.filter(p => p.tono && selectedTonos.includes(p.tono))
+    }
+
     // Sort
     switch (sortBy) {
       case 'precio-asc':  list.sort((a, b) => a.price - b.price);   break
@@ -243,13 +289,13 @@ export default function Catalogo() {
     }
 
     return list
-  }, [activeCategory, selectedTipos, priceRange, minRating, sortBy])
+  }, [activeCategory, selectedTipos, priceRange, minRating, sortBy, selectedTonos])
 
   const meta = CATEGORY_META[activeCategory] || CATEGORY_META['']
   const activeLabel = CATEGORIES.find(c => c.slug === activeCategory)?.label || 'Todos'
 
-  const activeFilterCount = (priceRange !== null ? 1 : 0) + (minRating > 0 ? 1 : 0) + selectedTipos.length
-  const clearFilters = () => { setPriceRange(null); setMinRating(0); setSelectedTipos([]) }
+  const activeFilterCount = (priceRange !== null ? 1 : 0) + (minRating > 0 ? 1 : 0) + selectedTipos.length + selectedTonos.length
+  const clearFilters = () => { setPriceRange(null); setMinRating(0); setSelectedTipos([]); setSelectedTonos([]) }
 
   const availableTipos = TIPOS_BY_CATEGORY[activeCategory] ?? TIPOS_BY_CATEGORY['']
 
@@ -357,6 +403,23 @@ export default function Catalogo() {
               </label>
             ))}
           </FilterSection>
+
+
+          {/* Tono – solo en maquillaje */}
+          {activeCategory === 'maquillaje' && <FilterSection title="Tono">
+            <div className={styles.tonoGrid}>
+              {TONOS.map(tono => (
+                <button
+                  key={tono.id}
+                  title={tono.label}
+                  className={`${styles.tonoSwatch} ${selectedTonos.includes(tono.id) ? styles.tonoSwatchActive : ''}`}
+                  style={{ background: tono.hex }}
+                  onClick={() => toggleTono(tono.id)}
+                  aria-label={tono.label}
+                />
+              ))}
+            </div>
+          </FilterSection>}
 
         </aside>
 

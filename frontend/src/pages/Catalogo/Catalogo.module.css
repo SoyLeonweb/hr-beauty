@@ -414,3 +414,33 @@
     transition: opacity 0.2s;
 }
 .emptyBtn:hover { opacity: 0.88; }
+
+/* ── Tono swatches ── */
+.tonoGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 4px 0;
+}
+
+.tonoSwatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2.5px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    padding: 0;
+}
+
+.tonoSwatch:hover {
+    transform: scale(1.15);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.tonoSwatchActive {
+    border-color: #FF6FAE;
+    box-shadow: 0 0 0 3px rgba(255,111,174,0.3);
+    transform: scale(1.1);
+}
