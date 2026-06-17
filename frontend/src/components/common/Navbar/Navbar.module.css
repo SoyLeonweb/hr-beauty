@@ -11,12 +11,20 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.scrolled {
+    box-shadow: var(--shadow-md);
+    background-color: rgba(255, 247, 250, 0.97);
+    backdrop-filter: blur(8px);
 }
 
 .logo img {
-    height: 40px;
+    height: 100px;
     width: auto;
     display: block;
+
 }
 
 /* Nav Links */

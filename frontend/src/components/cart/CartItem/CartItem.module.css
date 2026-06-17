@@ -1,1 +1,128 @@
-/* CartItem styles */
+/* CartItem */
+
+.item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto auto auto;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.item:last-child { border-bottom: none; }
+
+.imageWrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.imagePlaceholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, var(--color-surface) 0%, var(--color-primary) 100%);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.category {
+    font-size: var(--font-xs);
+    color: var(--color-cta);
+    font-weight: var(--fw-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.name {
+    font-size: var(--font-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--color-text);
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.unitPrice {
+    font-size: var(--font-xs);
+    color: var(--color-text-light);
+}
+
+.qtyControl {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.qtyBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text);
+    transition: background-color 0.15s, color 0.15s;
+    flex-shrink: 0;
+}
+
+.qtyBtn:hover {
+    background-color: var(--color-surface);
+    color: var(--color-cta);
+}
+
+.qty {
+    min-width: 32px;
+    text-align: center;
+    font-size: var(--font-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--color-text);
+    user-select: none;
+}
+
+.lineTotal {
+    font-size: var(--font-body);
+    font-weight: var(--fw-bold);
+    color: var(--color-text);
+    white-space: nowrap;
+    min-width: 100px;
+    text-align: right;
+}
+
+.removeBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: none;
+    color: var(--color-text-light);
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+    flex-shrink: 0;
+}
+
+.removeBtn:hover {
+    background-color: #FEE2E2;
+    color: #EF4444;
+}

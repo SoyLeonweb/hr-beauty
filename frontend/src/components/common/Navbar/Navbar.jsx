@@ -1,8 +1,9 @@
+import { useState, useEffect } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useCart } from '../../../context/CartContext'
 import { useAuth } from '../../../context/AuthContext'
 import styles from './Navbar.module.css'
-import logo from '../../../assets/images/Logo/Hr-Beauty-Logo.png'
+import logo from '../../../assets/images/Logo/logofinal.png'
 
 const SearchIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -36,9 +37,16 @@ export default function Navbar() {
   const { count } = useCart()
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <nav className={styles.navbar}>
+    <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.logo}>
         <Link to="/"><img src={logo} alt="HR Beauty" /></Link>
       </div>
